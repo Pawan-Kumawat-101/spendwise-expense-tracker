@@ -1,0 +1,501 @@
+/* =========================================================
+   SpendWise – Personal Expense Tracker
+   Sections: 1 Theme  2 Base  3 Header  4 Layout & Cards
+             5 Forms  6 Charts & List  7 Mobile
+   ========================================================= */
+
+/* ---------- 1. THEME (colors) ---------- */
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #1e2433;
+  --muted: #6b7385;
+  --line: #e4e8f0;
+  --pri: #4f46e5;
+  --inc: #10b981;
+  --exp: #ef4444;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Dark mode: follows the device setting */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1320;
+    --card: #181d2e;
+    --text: #e8ebf5;
+    --muted: #8d95ad;
+    --line: #272e45;
+    --pri: #818cf8;
+  }
+}
+
+/* Dark mode: when the user clicks the theme button */
+:root[data-theme="dark"] {
+  --bg: #0f1320;
+  --card: #181d2e;
+  --text: #e8ebf5;
+  --muted: #8d95ad;
+  --line: #272e45;
+  --pri: #818cf8;
+}
+
+/* ---------- 2. BASE ---------- */
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- 3. HEADER ---------- */
+header {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 16px 26px;
+  color: #fff;
+  background: linear-gradient(135deg, #4338ca, #7c3aed 55%, #db2777);
+}
+
+/* Decorative circles */
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff14;
+}
+
+header::before {
+  width: 260px;
+  height: 260px;
+  right: -60px;
+  top: -110px;
+}
+
+header::after {
+  width: 160px;
+  height: 160px;
+  left: -40px;
+  bottom: -90px;
+}
+
+header .wrap {
+  position: relative;
+  z-index: 1;
+  padding: 0 16px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #ffffff26;
+  font-size: 1.2rem;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: #ffffff26;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.hero {
+  margin-top: 20px;
+}
+
+.hero small {
+  opacity: 0.8;
+}
+
+.hero h1 {
+  margin: 2px 0 4px;
+  font-size: 1.7rem;
+}
+
+.hero p {
+  margin: 0;
+  font-size: 0.92rem;
+  opacity: 0.88;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.pill {
+  padding: 8px 14px;
+  border: 1px solid #ffffff33;
+  border-radius: 12px;
+  background: #ffffff1f;
+  backdrop-filter: blur(6px);
+}
+
+.pill small {
+  display: block;
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+.pill b {
+  font-size: 1.05rem;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: #fff;
+  color: #4338ca;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---------- 4. LAYOUT & CARDS ---------- */
+.card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.stats {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.two {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.stat small {
+  color: var(--muted);
+}
+
+.stat b {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.6rem;
+}
+
+.bal b { color: var(--pri); }
+.inc b { color: var(--inc); }
+.exp b { color: var(--exp); }
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.budget-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.bar {
+  height: 10px;
+  margin: 8px 0;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--line);
+}
+
+.bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--inc);
+  transition: width 0.4s;
+}
+
+/* ---------- 5. FORMS & BUTTONS ---------- */
+label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+/* 16px stops iPhone from zooming on focus */
+input,
+select {
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  background: var(--pri);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.ghost {
+  width: auto;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+}
+
+button,
+.cta,
+.fab {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#form {
+  margin-top: 14px;
+}
+
+#form h2 {
+  margin: 0;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  align-items: end;
+  gap: 10px;
+}
+
+.error {
+  color: var(--exp);
+}
+
+/* ---------- 6. CHARTS, LIST & FOOTER ---------- */
+.chart {
+  position: relative;
+  height: 260px;
+}
+
+.top-spend {
+  display: block;
+  margin: -8px 0 8px;
+  color: var(--muted);
+}
+
+#history {
+  margin-top: 14px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filters > div {
+  flex: 1;
+  min-width: 140px;
+}
+
+.filters > .auto {
+  flex: 0;
+}
+
+.list {
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.row small {
+  color: var(--muted);
+}
+
+.row .amt {
+  font-weight: 700;
+}
+
+.row .del {
+  width: auto;
+  padding: 4px 8px;
+  background: none;
+  color: var(--muted);
+}
+
+.empty {
+  padding: 24px 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+footer {
+  padding: 24px 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Floating add button – hidden on desktop */
+.fab {
+  display: none;
+}
+
+/* ---------- 7. MOBILE (phones) ---------- */
+@media (max-width: 600px) {
+  .wrap,
+  header .wrap {
+    padding: 0 12px;
+  }
+
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .pill {
+    flex: 1;
+    padding: 8px 10px;
+  }
+
+  .cta {
+    flex-basis: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats .card:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+
+  .stat b {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form > div:first-child,
+  .form > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Bigger touch targets */
+  input,
+  select,
+  button {
+    min-height: 44px;
+  }
+
+  .chart {
+    height: 230px;
+  }
+
+  .list {
+    max-height: none;
+  }
+
+  .row .del {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  .filters > div {
+    min-width: calc(50% - 5px);
+  }
+
+  .filters > div:nth-child(3) {
+    min-width: 100%;
+  }
+
+  .fab {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 5;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--pri);
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 6px 18px #0004;
+  }
+
+  footer {
+    padding-bottom: 80px;
+  }
+}

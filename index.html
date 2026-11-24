@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SpendWise – Personal Expense Tracker</title>
+
+  <!-- Chart.js (charts library) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">
+          <span class="logo">💸</span>SpendWise
+        </div>
+        <button class="icon" id="theme" aria-label="Toggle theme">🌓</button>
+      </div>
+
+      <div class="hero">
+        <small id="hdate"></small>
+        <h1 id="hgreet">Hello 👋</h1>
+        <p>Track income, control spending, reach your goals.</p>
+      </div>
+
+      <div class="pills">
+        <div class="pill">
+          <small>Spent this month</small>
+          <b id="hsp">₹0</b>
+        </div>
+        <div class="pill">
+          <small>Budget left</small>
+          <b id="hleft">—</b>
+        </div>
+        <a class="cta" href="#form">+ Add transaction</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ================= SUMMARY CARDS ================= -->
+    <section class="grid stats">
+      <div class="card stat bal">
+        <small>Balance</small>
+        <b id="bal">₹0</b>
+        <small id="sr"></small>
+      </div>
+
+      <div class="card stat inc">
+        <small>Income</small>
+        <b id="inc">₹0</b>
+      </div>
+
+      <div class="card stat exp">
+        <small>Expenses</small>
+        <b id="exp">₹0</b>
+      </div>
+
+      <div class="card stat">
+        <small>Monthly budget</small>
+        <div class="budget-input">
+          <input id="budget" type="number" min="0" placeholder="Set ₹ limit">
+        </div>
+        <div class="bar"><i id="bfill"></i></div>
+        <small id="btxt">No budget set</small>
+      </div>
+    </section>
+
+    <!-- ================= ADD TRANSACTION ================= -->
+    <section class="card grid" id="form">
+      <h2>Add transaction</h2>
+
+      <div class="form">
+        <div>
+          <label for="title">Title</label>
+          <input id="title" placeholder="e.g. Canteen lunch">
+        </div>
+        <div>
+          <label for="amount">Amount (₹)</label>
+          <input id="amount" type="number" min="1">
+        </div>
+        <div>
+          <label for="type">Type</label>
+          <select id="type">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <div>
+          <label for="cat">Category</label>
+          <select id="cat"></select>
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input id="date" type="date">
+        </div>
+        <div>
+          <button id="add">Add</button>
+        </div>
+      </div>
+
+      <small id="err" class="error"></small>
+    </section>
+
+    <!-- ================= CHARTS ================= -->
+    <section class="grid two">
+      <div class="card">
+        <h2>Spending by category</h2>
+        <small id="top" class="top-spend"></small>
+        <div class="chart"><canvas id="c1"></canvas></div>
+      </div>
+
+      <div class="card">
+        <h2>Last 6 months</h2>
+        <div class="chart"><canvas id="c2"></canvas></div>
+      </div>
+    </section>
+
+    <!-- ================= TRANSACTIONS ================= -->
+    <section class="card" id="history">
+      <h2>Transactions</h2>
+
+      <div class="filters">
+        <div>
+          <label for="fm">Month</label>
+          <input type="month" id="fm">
+        </div>
+        <div>
+          <label for="fc">Category</label>
+          <select id="fc">
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div>
+          <label for="fs">Search</label>
+          <input id="fs" placeholder="Search title">
+        </div>
+        <div class="auto">
+          <label>&nbsp;</label>
+          <button class="ghost" id="clear">Reset data</button>
+        </div>
+        <div class="auto">
+          <label>&nbsp;</label>
+          <button class="ghost" id="csv">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="list" id="list"></div>
+    </section>
+
+  </main>
+
+  <footer>Built with HTML, CSS, JavaScript &amp; Chart.js · Data saved in your browser</footer>
+
+  <!-- Floating add button (visible on mobile only) -->
+  <a class="fab" href="#form" aria-label="Add transaction">+</a>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
